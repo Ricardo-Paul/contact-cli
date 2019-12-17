@@ -1,0 +1,28 @@
+** Accept argument from the command line in nodejs
+
+-- commander package gives us the ** command() method
+** as arguments command() takes a function along wiht its parameters
+** parameters are inside double quotes but are not strings
+We can start using Commander in our application by simply requiring it and calling the parse() method at the end of our script and passing in the process arguments.
+
+** it takes an alias for the function name (which is the command)
+** describes the command
+
+.description('Add a contact')
+** process the arguments in .action
+
+** takes all the arguments and pass them as an object to the function
+
+
+.action((firstname, lastname) =>{
+    addContat({firstname, lastname});
+} )
+
+const program = require('commander')
+program
+    .command('addContat <firstname> <lastname>')
+    .alias('a)
+    .description('Add a contact')
+    .action((firstname, lastname) => {
+        addContat({firstname, lastname});
+    } )
