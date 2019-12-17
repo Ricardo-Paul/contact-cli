@@ -1,0 +1,49 @@
+// ** Using inquirer to get rid of arguments in the command() method
+    -- remember we had 
+    program
+        .command('addContact <firstname> <lastname>')
+        ** those parameters will be a name for each question
+
+
+-- Now we'll use inquirer to prompt questions and make it more interactive
+
+const { prompt } = require('inquirer')
+
+QUESTIONS STYLE
+    questions is an array of objects, each object is an input ( TYPE, NAME, MESSAGE)
+    NAME is the name of the field (firstname, lastname)
+
+const questions = [
+    {
+        type: 'input',
+        name: 'firstname',
+        message: 'Enter firstname...'
+    },
+    {
+        type: 'input',
+        name: 'lastname',
+        message: 'Enter lastname...'
+    }
+]
+
+-- when we pass the questions inside prompt (inquirer) it returns a promise (answers)
+which we pass as argument to the function
+
+prompt(questions).then(answers => {
+    addContact(answers)
+})
+
+UPDATE ACTION FROM 
+
+.action((firstname, lastname) =>{
+    addContact({firstname, lastname});
+})
+
+TO 
+
+.action(()=>{
+    prompt(questions)
+    .then(answers =>{
+        addContact(answers)
+    })
+})

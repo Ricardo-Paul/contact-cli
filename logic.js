@@ -1,8 +1,6 @@
 const Datastore = require('nedb');
 const contacts = new Datastore({ filename: 'contacts.db'})
-contacts.loadDatabase(()=>{
-    console.info('contacts db loaded !')
-})
+contacts.loadDatabase()
 var Jack = {
     firstname: 'Jack',
     lastname: 'Dorsey'
@@ -23,11 +21,15 @@ const addContact = (contact) => {
 
 // get contact
 const getContact = (name) => {
+    if(!name){
+        console.log('Please provide a name to search')
+        return
+    }
     const search = new RegExp(name, 'i');
     contacts.find({ $or: [{firstname: search}, {lastname: search}] })
         .exec((err, contact) => {
             console.info(contact);
-            console.info(contact.length, 'matches')
+            console.info('NOT FOUND',contact.length, 'matches')
         })
 }
 
