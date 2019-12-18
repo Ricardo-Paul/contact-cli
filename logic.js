@@ -33,9 +33,23 @@ const getContact = (name) => {
         })
 }
 
-
-module.exports = {
-    addContact,
-    getContact
+// get contact list
+const getContactList = () => {
+    let contact;
+   contacts.find({}).exec((err, contacts) => {
+   contact = contacts.length === 1 ? 'contact' : 'contacts'
+   console.log(contacts.length, contact, ' Found')
+      contacts.forEach(contact =>{
+         console.log('firstname:', contact.firstname,' |  ', 'lastname: ', contact.lastname); 
+      }
+      )
+   })
 }
 
+
+module.exports = {
+    contacts,
+    addContact,
+    getContact,
+    getContactList
+}

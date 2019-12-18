@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const { addContact, getContact } = require('./logic')
+const { addContact, getContact, getContactList } = require('./logic')
 const { prompt } = require('inquirer');
 
 
@@ -38,4 +38,9 @@ program
     .description('Search a contact')
     .action(name => getContact(name))
 
+program
+   .command('getContactList')
+   .alias('l')
+   .description(' Show all the contacts')
+   .action(() => getContactList())
 program.parse(process.argv);
